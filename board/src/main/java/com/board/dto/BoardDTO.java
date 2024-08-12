@@ -10,7 +10,7 @@ public class BoardDTO {
 	private int id;
 	private String title, content;
 	private int hit;
-	private LocalDateTime createAt;
+	private LocalDateTime createdAt;
 	private String creator;
 	private LocalDateTime updateAt;
 }

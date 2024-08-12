@@ -12,12 +12,12 @@ import com.board.service.BoardService;
 
 @Controller // 컨트롤러 지정 어노테이션
 public class BoardController {
-	@Autowired
+	@Autowired // 서비스 빈(Bean) 자동 주입
 	private BoardService bs;
 	
 	@RequestMapping("/board/list") // 요청에 맞는 주소 지정
 	public ModelAndView boardList() throws Exception {
-		// src/main/resource/templates/board/list
+		// src/main/resource/templates/board/list.html으로 화면 지정
 		ModelAndView mv = new ModelAndView("board/list");
 		// 비지니스 로직 수행
 		List<BoardDTO> boardList = bs.selectBoardList();

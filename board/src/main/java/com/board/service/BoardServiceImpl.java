@@ -10,7 +10,7 @@ import com.board.mapper.BoardMapper;
 
 @Service // 비즈니스 로직을 처리하는 서비스 클래스임을 나타내는 어노테이션
 public class BoardServiceImpl implements BoardService {
-	@Autowired
+	@Autowired // Mapper 자동 주입
 	private BoardMapper boardMapper;
 	
 	@Override
