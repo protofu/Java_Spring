@@ -31,14 +31,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${list.size > 0}" th:each="item : ${list}">
+				<!-- 게시물이 있을 경우 -->
+				<tr 
+					th:if="${list.size > 0}" 
+					th:each="item : ${list}"
+					th:onclick="|location.href='detail?id=${item.id}'|"
+					role="button"
+				>
 					<td class="text-center" th:text="${item.id}"></td>
 					<td th:text="${item.title}"></td>
 					<td class="text-center" th:text="${item.hit}"></td>
-					<td class="text-center" th:text="${item.createdAt}"></td>					
+					<td 
+						class="text-center" 
+						th:text="${#temporals.format(item.createdAt, 'yyyy-MM-dd')}"
+					>
+					</td>					
+				</tr>
+				<!-- 게시물이 없을 경우 -->
+				<tr th:unless="${list.size > 0}">
+					<td colspan='4' class='text-center'>게시물이 음슴!</td>
 				</tr>
 			</tbody>
 		</table>
+		<a href="insert" class="btn btn-success">글쓰기</a>
 	</div>
 </body>
 </html>

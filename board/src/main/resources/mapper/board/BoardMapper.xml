@@ -13,4 +13,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			is_deleted = "n"
 	</select>
+	<insert id="insertBoard" parameterType="com.board.dto.BoardDTO">
+		INSERT INTO
+			board_tbl
+			(title, content, created_at, creator)
+		Values
+			(#{title}, #{content}, NOW(), "김밥")	
+	</insert>
+	<select id="selectBoardById" parameterType="int" resultType="com.board.dto.BoardDTO">
+		SELECT
+			id, 
+			title, 
+			content, 
+			hit, 
+			created_at,
+			creator
+		FROM
+			board_tbl
+		WHERE 
+			id=#{id}
+			AND is_deleted = 'n' 	
+	</select>
+	<update id="updateBoard" parameterType="com.board.dto.BoardDTO">
+		UPDATE 
+			board_tbl
+		SET
+			title = #{title},
+			content = #{content}
+		WHERE
+			id = #{id}
+	</update>
+	<update id="updateHit" parameterType="int">
+		UPDATE
+			board_tbl
+		SET
+			hit = hit + 1
+		WHERE
+			id = #{id}
+	</update>
+	<delete id="deleteBoard" parameterType="int">
+		UPDATE
+			board_tbl
+		SET
+			is_deleted = 'y'
+		WHERE
+			id = #{id}
+	</delete>
 </mapper>
