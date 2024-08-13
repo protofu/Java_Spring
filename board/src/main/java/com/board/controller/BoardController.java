@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.board.dto.BoardDTO;
@@ -46,9 +47,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/insert")
-	public String boardInsert(BoardDTO boardDTO) throws Exception {
+	public String boardInsert(BoardDTO boardDTO, @RequestParam(value="files", required=false) List<MultipartFile> files) throws Exception {
 		// 글쓰기 비지니스 로직
-		bs.insertBoard(boardDTO);
+		bs.insertBoard(boardDTO, files);
 		return "redirect:/board/list";
 	}
 	
@@ -71,4 +72,12 @@ public class BoardController {
 		bs.deleteBoard(id);
 		return "redirect:/board/list";
 	}
+	
+//	@ExceptionHandler(Exception.class)
+//	public ModelAndView handleException(Exception e) {
+//		log.error("예외 발생 : {}", e.getMessage());
+//		ModelAndView mv = new ModelAndView("board/error");
+//		mv.addObject("errorMsg", e.getMessage());
+//		return mv;
+//	}
 }

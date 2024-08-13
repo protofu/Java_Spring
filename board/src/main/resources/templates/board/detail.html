@@ -57,6 +57,13 @@
 					<textarea name="content" class="form-control" rows="10" th:text="${board.content}" required></textarea>
 				</div>
 			</div>
+			<div class="mb-3">
+				<a 
+					th:each="file : ${board.fileList}" 
+					th:text="${file.originFileName}"
+				>
+				</a>
+			</div>
 			<div class="text-center">
 				<a href="list" class="btn btn-primary">목록으로 돌아가기</a>
 				<button class="btn btn-primary">수정하기</button>

@@ -15,8 +15,8 @@
 <body>
 	<div class="container mt-5">
 		<h2 class="text-center mb-4">게시글 등록</h2>
-		<!-- 게시글 등록 폼 -->
-		<form action="insert" method="post">
+		<!-- 게시글 등록 폼 | 파일 업로드 속성 : enctype="multipart/form-data" -->
+		<form action="insert" method="post" enctype="multipart/form-data">
 			<div class="mb-3">
 				<label for="title" class="form-label">제목</label>
 				<input type="text" class="form-control" name="title" id="title" required />
@@ -24,6 +24,10 @@
 			<div class="mb-3">
 				<label for="content" class="form-label">내용</label>
 				<textarea class="form-control" name="content" id="content" required></textarea>
+			</div>
+			<div class="mb-3">
+				<label for="files" class="form-label">파일</label>
+				<input type="file" class="form-control" name="files" id="files" multiple accept="image/*" />
 			</div>
 			<div class="text-center">
 				<button class="btn btn-primary">저장</button>

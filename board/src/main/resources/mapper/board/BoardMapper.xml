@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			is_deleted = "n"
 	</select>
-	<insert id="insertBoard" parameterType="com.board.dto.BoardDTO">
+	<insert id="insertBoard" parameterType="com.board.dto.BoardDTO" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO
 			board_tbl
 			(title, content, created_at, creator)
@@ -59,4 +59,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE
 			id = #{id}
 	</delete>
+	
 </mapper>
