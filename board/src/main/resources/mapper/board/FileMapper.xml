@@ -25,4 +25,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 
 			board_id=#{boardId} AND is_deleted = 'n'
 	</select>
+	<select id="selectFileByIds" parameterType="map" resultType="com.board.dto.FileDTO">
+		SELECT
+			origin_file_name,
+			stored_file_path,
+			file_size
+		FROM
+			file_tbl
+		WHERE
+			id=#{id} 
+			AND board_id=#{boardId} 
+			AND is_deleted = 'n'
+	</select>
 </mapper>

@@ -1,17 +1,27 @@
 package com.board.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicComboBoxRenderer.UIResource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriUtils;
 
 import com.board.dto.BoardDTO;
+import com.board.dto.FileDTO;
 import com.board.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -72,12 +82,33 @@ public class BoardController {
 		bs.deleteBoard(id);
 		return "redirect:/board/list";
 	}
-	
-//	@ExceptionHandler(Exception.class)
-//	public ModelAndView handleException(Exception e) {
-//		log.error("예외 발생 : {}", e.getMessage());
-//		ModelAndView mv = new ModelAndView("board/error");
-//		mv.addObject("errorMsg", e.getMessage());
-//		return mv;
-//	}
+
+	@RequestMapping("/download")
+	public ResponseEntity<Resource> downloadFile(@RequestParam("id") int id, @RequestParam("boardId") int boardId) throws Exception {
+		FileDTO fileDTO = bs.selectFileByIds(id, boardId);
+		String fileName = fileDTO.getOriginFileName();
+		UrlResource resource;
+		try {
+			resource = new UrlResource("file:" + fileDTO.getStoredFilePath());			
+		} catch (Exception e) {
+			throw new Exception("파일 다운로드 에러");
+		}
+		
+		String encodedFileName = UriUtils.encode(fileName, StandardCharsets.UTF_8);
+		// contents disposition : attachment; filename="asdasd.png"
+		String contentDispositionValue = "attachment; filename=\""+ encodedFileName +"\"";
+		return 
+			ResponseEntity
+			.ok()
+			.header(HttpHeaders.CONTENT_DISPOSITION, contentDispositionValue)
+			.body(resource);
+	}
+
+	@ExceptionHandler(Exception.class)
+	public ModelAndView handleException(Exception e) {
+		log.error("예외 발생 : {}", e.getMessage());
+		ModelAndView mv = new ModelAndView("board/error");
+		mv.addObject("errorMsg", e.getMessage());
+		return mv;
+	}
 }

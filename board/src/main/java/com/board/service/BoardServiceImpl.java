@@ -95,5 +95,14 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.deleteBoard(id);
 	}
 
+	@Override
+	public FileDTO selectFileByIds(int id, int boardId) throws Exception {
+		// 서비스
+		// 서비스를 통해서 id와 boardId가 일치하는 FileDTO를 가져온다.
+		FileDTO fileDTO = fileMapper.selectFileByIds(id, boardId);
+		// 파일 리소스를 만들어서 반환
+		return fileDTO;
+	}
+
 	
 }
