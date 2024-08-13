@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="https://www.ultraq.net.nz/thymeleaf/layout"
+>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 각 페이지의 CSS -->
+<th:block layout:fragment="css"></th:block>
+<!-- 각 페이지의 JAVASCRIPT -->
+<th:block layout:fragment="script"></th:block>
+</head>
+<body>
+	<div th:replace="fragment/header::header"></div>
+	<div layout:fragment="content"></div>
+	<div th:replace="fragment/footer::footer"></div>
+</body>
+</html>
