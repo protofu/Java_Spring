@@ -15,4 +15,6 @@ public interface UserMapper {
 	void insertUser(UserDTO userDTO) throws Exception;
 	// 회원 삭제하기
 	void deleteUser(int id) throws Exception;
+	// 회원 한명 가져오기
+	UserDTO selectUser(int id);
 }

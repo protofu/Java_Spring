@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/default}">
+<div layout:fragment="content" class="container my-4">
+        <!-- 카드 컴포넌트를 사용하여 디테일 정보 표시 -->
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title" th:text="${inter.name} + '? 이런 나라야!'"></h1>
+            </div>
+            <div class="card-body">
+                <!-- 대빵 이름 -->
+                <h2 class="card-subtitle mb-2 text-muted" th:text="'대빵 이름 : ' + ${user.name}">수장 이름</h2>
+                
+                <!-- 나라 설명 -->
+                <p class="card-text">
+                    <strong>설명:</strong> <span th:text="${inter.content}">설명</span>
+                </p>
+                
+                <!-- 메달 수 -->
+                <p class="card-text">
+                    <strong>금메달:</strong> <span th:text="${inter.gold}">금메달 수</span>
+                </p>
+                <p class="card-text">
+                    <strong>은메달:</strong> <span th:text="${inter.silver}">은메달 수</span>
+                </p>
+                <p class="card-text">
+                    <strong>동메달:</strong> <span th:text="${inter.bronze}">동메달 수</span>
+                </p>
+            </div>
+            <div class="card-footer text-end">
+                <a th:href="@{/olympic/modify(id=${inter.id})}" class="btn btn-info">수정</a>
+                <a href="/olympic" class="btn btn-primary">돌아가기</a>
+            </div>
+        </div>
+    </div>
+</html>

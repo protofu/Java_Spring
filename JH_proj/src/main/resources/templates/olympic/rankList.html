@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <div layout:fragment="content" class="container my-4">
+        <table class="table table-striped" style="text-align: center;">
+          <thead class="">
+              <tr>
+                  <th>순위</th>
+                  <th>국기</th>
+                  <th>나라</th>
+                  <th>금메달</th>
+                  <th>은메달</th>
+                  <th>동메달</th>
+                  <th>합계</th>
+                  <th>삭제</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr th:each="inter, stat : ${rank}" style="font-weight: bold; font-size: 20px;">
+                  <td th:text="${ stat.index + 1 }"></td> <!-- 순위 나타내기 -->
+                  <td th:text="${ inter.name }"></td> <!-- 국기 나타내기 -->
+                  <td>
+                    <a 
+                        th:href="@{/olympic/detail(id=${inter.id})}" 
+                        th:text="${inter.name}"
+                        style="text-decoration-line: none; color: black;"
+                    ></a>
+                  </td>
+                  <td th:text="${ inter.gold }" style="color: gold;"></td>
+                  <td th:text="${ inter.silver }" style="color: silver;"></td>
+                  <td th:text="${ inter.bronze }" style="color: brown;"></td>
+<!--                   <td th:text="${ inter.gold } + ${ inter.silver } + ${ inter.bronze }"></td> -->
+                  <td th:text="${ inter.gold + inter.silver + inter.bronze }"></td>
+<!--                   <td>
+                      <form th:action="@{/user/delete(id=${user.id})}" th:method="DELETE">
+                          <input type="hidden" name="id" th:value=${user.id}/>
+                          <button class="btn btn-danger">삭제</button>
+                      </form>
+                  </td> -->
+                  <td>
+                      <form th:action="@{/olympic/delete(id=${inter.id})}" th:method="DELETE">
+                          <input type="hidden" name="id" th:value=${inter.id}/>
+                          <button class="btn btn-danger">X</button>
+                      </form>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+        <a href="/olympic/add" class="btn btn-success">참가(나라) 등록</a>
+    </div>
+</html>

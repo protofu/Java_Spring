@@ -26,4 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE
             id = #{id}
     </update>    
+    <select id="selectUser" parameterType="int" resultType="com.kosta.dto.UserDTO">
+        SELECT
+            *
+        FROM
+            users_tbl
+        WHERE
+            id=#{id}
+    </select>
 </mapper>

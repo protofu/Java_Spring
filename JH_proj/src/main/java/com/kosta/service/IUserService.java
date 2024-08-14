@@ -27,5 +27,10 @@ public class IUserService implements UserService {
 	public void removeUser(int id) throws Exception {
 		um.deleteUser(id);
 	}
+
+	@Override
+	public UserDTO getUser(int id) throws Exception {
+		return um.selectUser(id);
+	}
 	
 }

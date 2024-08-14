@@ -1,12 +1,11 @@
 package com.kosta.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class OlympicDTO {
-	private int id, president_id;
+	private int id, presidentId;
 	private String name, content;
 	private int gold, silver, bronze;
+	private String flagImg;
 }

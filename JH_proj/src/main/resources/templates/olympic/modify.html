@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+    <title>Modify Olympic Details</title>
+</head>
+<body>
+<div layout:fragment="content" class="container my-4">
+    <!-- 카드 컴포넌트를 사용하여 디테일 정보 표시 -->
+    <div class="card">
+        <div class="card-header">
+            <h1 class="card-title" th:text="${inter.name} + '? 이런 나라야!'"></h1>
+        </div>
+        <div class="card-body">
+            <!-- 폼을 사용하여 수정 정보 입력 -->
+            <form th:action="@{/olympic/update}" method="post">
+                <!-- 숨겨진 필드로 ID 전송 -->
+                <input type="hidden" name="id" th:value="${inter.id}" />
+
+                <!-- 대빵 이름 -->
+                <input type="hidden" class="form-control" id="presidentId" name="presidentId" th:value="${inter.presidentId}" required />
+
+                <!-- 나라 설명 -->
+                <div class="mb-3">
+                    <label for="content" class="form-label">설명</label>
+                    <textarea class="form-control" id="content" name="content" rows="3" required th:text="${inter.content}"></textarea>
+                </div>
+
+                <!-- 메달 수 -->
+                <div class="mb-3">
+                    <label for="gold" class="form-label">금메달</label>
+                    <input type="number" class="form-control" id="gold" name="gold" th:value="${inter.gold}" required />
+                </div>
+                <div class="mb-3">
+                    <label for="silver" class="form-label">은메달</label>
+                    <input type="number" class="form-control" id="silver" name="silver" th:value="${inter.silver}" required />
+                </div>
+                <div class="mb-3">
+                    <label for="bronze" class="form-label">동메달</label>
+                    <input type="number" class="form-control" id="bronze" name="bronze" th:value="${inter.bronze}" required />
+                </div>
+
+                <!-- 제출 및 취소 버튼 -->
+                <div class="text-end">
+                    <button type="submit" class="btn btn-success">저장</button>
+                    <a href="/olympic" class="btn btn-secondary">취소</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

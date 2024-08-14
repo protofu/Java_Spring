@@ -46,6 +46,7 @@ public class UserController {
 		}
 		return "redirect:/user";
 	}
+	
 	@DeleteMapping("/delete")
 	public String userDelete(@RequestParam("id") int id) {
 		try {
@@ -55,5 +56,7 @@ public class UserController {
 		}
 		return "redirect:/user";
 	}
+	
+
 	
 }

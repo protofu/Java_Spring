@@ -12,4 +12,5 @@ public interface UserService {
 	void addUser(UserDTO userDTO) throws Exception;
 	// 회원 삭제하기
 	void removeUser(int id) throws Exception;
+	UserDTO getUser(int id) throws Exception;
 }

@@ -4,7 +4,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.kosta.mapper.OlympicMapper">
-    <select id="selectRankList">
-    
+    <select id="selectRankList" resultType="com.kosta.dto.OlympicDTO">
+        SELECT
+            id, president_id, name, content, gold, silver, bronze
+        FROM
+            olympic_tbl
+        WHERE
+            is_deleted='n'
+        ORDER BY
+            gold DESC, silver DESC, bronze DESC
     </select>
+    <insert id="insertInternational" parameterType="com.kosta.dto.OlympicDTO">
+        INSERT INTO
+            olympic_tbl (president_id, name)
+        VALUES
+            (#{presidentId}, #{name})
+    </insert>
+    <update id="removeInternational" parameterType="int">
+        UPDATE
+            olympic_tbl
+        SET
+            is_deleted='y'
+        WHERE
+            id=#{id}
+    </update>
+    <select id="selectInter" parameterType="int" resultType="com.kosta.dto.OlympicDTO">
+        SELECT
+            *
+        FROM
+            olympic_tbl
+        WHERE
+            id=#{id}
+    </select>
+    <update id="updateOlympic" parameterType="com.kosta.dto.OlympicDTO">
+        UPDATE
+            olympic_tbl
+        SET
+            name=#{name}, content=#{content}, gold=#{gold}, silver=#{silver}, bronze=#{bronze}
+        WHERE
+            id=#{id}
+    </update>
 </mapper>
