@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <div layout:fragment="contents" class="container my-4" style="padding-top: 60px">
+       <h2 class="mb-4">게시글 작성</h2>
+       <form action="/community/add" method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" name="title" id="title" placeholder="제목 입력" required>
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea class="form-control" rows="5" name="content" id="content" placeholder="내용 입력" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="creatorId" class="form-label">작성자</label>
+                <select id="creatorId" name="creatorId" class="form-control" required>
+                    <option value="" disabled selected>유저를 선택하세요</option>
+                    <option th:each="user : ${users}"
+                            th:value="${user.id}"
+                            th:text="${user.name}">유저 이름</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="files" class="form-label">이미지첨부</label>
+                <input type="file" class="form-control" name="files" id="files" accept="img/*" multiple />
+            </div>
+            <button type="reset" class="btn btn-primary">초기화</button>
+            <button class="btn btn-primary">작성</button>
+       </form>
+    </div>
+</html>

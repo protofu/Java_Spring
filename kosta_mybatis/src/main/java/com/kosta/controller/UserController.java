@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -26,6 +27,7 @@ public class UserController {
 	@GetMapping("/add")
 	public ModelAndView addForm() {
 		ModelAndView mv = new ModelAndView("user/userform");
+		mv.addObject("menu", "user");
 		return mv;
 	}
 	
@@ -50,11 +52,12 @@ public class UserController {
 	}
 	
 	// 특정 회원 조회
-	@GetMapping("/detail")
-	public ModelAndView detail(@PathVariable int id) throws Exception {
+	@GetMapping("/detail/{id}")
+	public ModelAndView detail(@PathVariable("id") int id) throws Exception {
 		ModelAndView mv = new ModelAndView("user/userdetail");
 		User user = us.getUserById(id);
-		mv.addObject(user);
+		mv.addObject("user", user);
+		mv.addObject("menu", "user");
 		return mv;
 	}
 	
@@ -63,7 +66,8 @@ public class UserController {
 	public ModelAndView list() throws Exception {
 		ModelAndView mv = new ModelAndView("user/userlist");
 		List<User> userList = us.getAll();
-		mv.addObject(userList);
+		mv.addObject("userlist", userList);
+		mv.addObject("menu", "user");
 		return mv;
 	}
 	
@@ -73,13 +77,17 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("user/userform");
 		User userById = us.getUserById(id);
 		mv.addObject("user", userById);
+		mv.addObject("menu", "user");
 		return mv;
 	}
 	
 	// 회원 수정 동작
 	@PatchMapping("/modify")
 	public String modify(User user) throws Exception {
-		us.modifyUser(user);
-		return "redirect:user/detail?id="+user.getId();
+		User u = us.modifyUser(user);
+		if (u==null) {
+			return "redirect:/user/list";			
+		}
+		return "redirect:/user/detail/"+user.getId();
 	}
 }

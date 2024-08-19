@@ -18,7 +18,7 @@
             id=#{id}    
     </update>
     <select id="findById" parameterType="int" resultType="com.kosta.dto.User">
-        SELETE
+        SELECT
             *
         FROM
             users_tbl
@@ -26,7 +26,7 @@
             id=#{id} AND is_deleted='n'
     </select>
     <select id="findAll" resultType="com.kosta.dto.User">
-        SELETE
+        SELECT
             *
         FROM
             users_tbl

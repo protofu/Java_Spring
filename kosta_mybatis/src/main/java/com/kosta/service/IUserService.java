@@ -14,32 +14,48 @@ public class IUserService implements UserService{
 	private UserMapper um;
 
 	@Override // 회원 추가
-	public boolean addUser(User user) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addUser(User user) {
+		try {
+			um.save(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override // 회원 삭제
-	public boolean deleteUser(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteUser(int id) {
+		try {
+			um.deleteById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override // 특정 회원 조회
 	public User getUserById(int id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		User user = um.findById(id);
+		return user;
 	}
 
 	@Override // 모든 회원 조회
 	public List<User> getAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> userList = um.findAll();
+		return userList;
 	}
 
 	@Override // 회원 정보 수정
-	public void modifyUser(User user) throws Exception {
-		// TODO Auto-generated method stub
+	public User modifyUser(User user) {
+		try {
+			um.updateUser(user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		return user;
 	}
 
 }

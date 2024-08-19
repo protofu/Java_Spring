@@ -14,5 +14,5 @@ public interface UserService {
 	// 모든 회원 조회
 	List<User> getAll() throws Exception;
 	// 회원 정보 수정
-	void modifyUser(User user) throws Exception;
+	User modifyUser(User user) throws Exception;
 }
