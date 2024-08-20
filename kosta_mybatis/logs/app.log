@@ -3570,3 +3570,14 @@ Caused by: java.lang.IllegalStateException: Failed to replace DataSource with an
 2024-08-20 15:56:51 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
 2024-08-20 15:56:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2024-08-20 15:56:51 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-08-20 16:36:11 [main] INFO  com.kosta.ServiceTest - Starting ServiceTest using Java 17.0.11 with PID 1376 (started by WD in C:\Users\WD\Desktop\Spring\kosta_mybatis)
+2024-08-20 16:36:11 [main] INFO  com.kosta.ServiceTest - No active profile set, falling back to 1 default profile: "default"
+2024-08-20 16:36:17 [main] INFO  com.kosta.ServiceTest - Started ServiceTest in 6.262 seconds (process running for 8.477)
+2024-08-20 16:36:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-08-20 16:36:20 [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19213a74
+2024-08-20 16:36:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-08-20 16:36:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-08-20 16:36:20 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-08-20 16:36:46 [RMI TCP Connection(525)-127.0.0.1] INFO  o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+2024-08-20 16:36:46 [RMI TCP Connection(525)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Shutdown initiated...
+2024-08-20 16:36:46 [RMI TCP Connection(525)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Shutdown completed.
