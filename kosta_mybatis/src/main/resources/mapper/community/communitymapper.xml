@@ -78,4 +78,18 @@
         WHERE
             community_id=#{id}
     </select>
+    <select id="findFileById" parameterType="int" resultType="com.kosta.dto.CommunityFile">
+        SELECT
+            *
+        FROM
+            community_file_tbl
+        WHERE
+            id=#{id}
+    </select>
+    <delete id="deleteFilesByComId" parameterType="int">
+        DELETE FROM
+            community_file_tbl
+        WHERE 
+            community_id=#{id}
+    </delete>    
 </mapper>

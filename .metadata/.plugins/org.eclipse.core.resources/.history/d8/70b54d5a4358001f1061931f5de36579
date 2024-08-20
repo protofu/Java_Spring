@@ -1,8 +1,0 @@
-package com.example.demo.controller;
-
-import org.springframework.web.bind.annotation.RestController;
-
-@RestController // 해당 클래스가 REST Controller 기능을 수행하도록 한다.
-public class HelloController {
-
-}

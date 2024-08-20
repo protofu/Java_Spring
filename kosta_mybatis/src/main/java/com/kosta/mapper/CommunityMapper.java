@@ -23,4 +23,8 @@ public interface CommunityMapper {
 	void updateHits(int id);
 	// 파일 가져오기
 	List<CommunityFile> findFilesByCommunityId(int id);
+	// 파일 다운로드
+	CommunityFile findFileById(int id);
+	// 파일 삭제
+	void deleteFilesByComId(int id) throws Exception;
 }

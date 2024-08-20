@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kosta.dto.Community;
+import com.kosta.dto.CommunityFile;
 
 public interface CommunityService {
 	// 글 목록 가져오기
@@ -14,5 +15,7 @@ public interface CommunityService {
 	// 특정 글 가져오기
 	Community getArticleById(int id);
 	// 글 삭제하기
-	void deleteArticle(int id);
+	void deleteArticle(int id) throws Exception;
+	
+	CommunityFile getCommunityFileById(int id) throws Exception;
 }

@@ -77,8 +77,14 @@ public class ICommunityService implements CommunityService{
 	}
 
 	@Override
-	public void deleteArticle(int id) {
+	public void deleteArticle(int id) throws Exception {
+		cm.deleteFilesByComId(id);
 		cm.deleteById(id);
+	}
+
+	@Override
+	public CommunityFile getCommunityFileById(int id) throws Exception {
+		return cm.findFileById(id);
 	}
 	
 	

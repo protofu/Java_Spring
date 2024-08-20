@@ -1,8 +1,13 @@
 package com.kosta.controller;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.UriUtils;
 
 import com.kosta.dto.Community;
+import com.kosta.dto.CommunityFile;
 import com.kosta.dto.User;
 import com.kosta.service.CommunityService;
 import com.kosta.service.UserService;
@@ -57,12 +64,31 @@ public class CommunityController {
 		mv.addObject("menu", "community");
 		Community article = cs.getArticleById(id);
 		mv.addObject("article", article);
+		System.out.println(article);
 		return mv;
 	}
 	
 	@DeleteMapping("/delete")
-	public String delete(@RequestParam("id") int id) {
+	public String delete(@RequestParam("id") int id) throws Exception {
 		cs.deleteArticle(id);
 		return "redirect:/community/list";
+	}
+	
+	@GetMapping("/download/{id}")
+	public ResponseEntity<Resource> downloadImg(@PathVariable("id") int id) throws Exception {
+		CommunityFile communityFile = cs.getCommunityFileById(id);
+		String originName = communityFile.getOriginFileName();
+		String newName = communityFile.getStoredFilePath();
+		UrlResource resource = new UrlResource("file:///C:\\Users\\WD\\Desktop\\images\\" + newName);
+		
+		String encodedOriginalName = UriUtils.encode(originName, StandardCharsets.UTF_8);
+		String contentDisposition = "attachment; filename=\"" + encodedOriginalName + "\"";
+		
+		ResponseEntity<Resource> result = ResponseEntity
+					.ok()
+					.header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+					.body(resource);
+		
+		return result;
 	}
 }
