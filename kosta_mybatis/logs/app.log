@@ -3181,3 +3181,6 @@ java.lang.Error: Unresolved compilation problem:
 2024-08-20 10:42:36 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Starting...
 2024-08-20 10:42:36 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-10 - Added connection com.mysql.cj.jdbc.ConnectionImpl@24c17ed5
 2024-08-20 10:42:36 [http-nio-8080-exec-1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-10 - Start completed.
+2024-08-20 14:11:00 [main] INFO  c.kosta.KostaMybatisApplicationTests - Starting KostaMybatisApplicationTests using Java 17.0.11 with PID 4372 (started by WD in C:\Users\WD\Desktop\Spring\kosta_mybatis)
+2024-08-20 14:11:00 [main] INFO  c.kosta.KostaMybatisApplicationTests - No active profile set, falling back to 1 default profile: "default"
+2024-08-20 14:11:05 [main] INFO  c.kosta.KostaMybatisApplicationTests - Started KostaMybatisApplicationTests in 5.855 seconds (process running for 9.253)
