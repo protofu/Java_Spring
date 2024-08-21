@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+    <p th:each="article : ${list}">
+        <a th:href="@{ '/detail/' + ${ article.id } }">
+            [[ ${article.title} ]]    
+        </a>
+    </p>
+</body>
+</html>
