@@ -5,10 +5,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <!--/* 제목 내용 둘다 검색 */-->
+    <form action="/list">
+        <input name="keyword" placeholder="검색어 입력" />
+        <button>검색</button>
+    </form>
+    
+    <!--/* 제목 기준 정렬 */-->
+    <form action="/list">
+        <select name="order">
+            <option value="asc">오름차순</option>
+            <option value="desc">내림차순</option>
+        </select>
+        <button>정렬</button>
+    </form>
+    
     <p th:each="article : ${list}">
         <a th:href="@{ '/detail/' + ${ article.id } }">
             [[ ${article.title} ]]    
         </a>
     </p>
+    <a href="/add">글쓰기</a>
 </body>
 </html>

@@ -3,7 +3,6 @@ package com.kosta.repository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -81,5 +80,34 @@ public class BlogRepoTest {
 		int newSize = blogRepo.findAll().size();
 		
 		assertThat(originSize).isEqualTo(newSize);
+	}
+
+	@Test
+	@DisplayName("특정 게시물 수정(id)")
+	public void updateArticleTest() {
+		Article article = Article.builder().title("테스트 제목").content("테스트 내용").build();
+		Article savedArticle = blogRepo.save(article);
+		
+		Article foundArticle = blogRepo.findById(savedArticle.getId()).get();
+		foundArticle.setTitle("변경된 테스트 제목");
+		foundArticle.setContent("변경된 테스트 내용");
+		blogRepo.save(foundArticle);
+		
+		Article updatedArticle = blogRepo.findById(savedArticle.getId()).get();
+		assertThat(updatedArticle.getTitle()).isEqualTo(foundArticle.getTitle());
+		assertThat(updatedArticle.getContent()).isEqualTo(foundArticle.getContent());
+	}
+
+	@Test
+	@DisplayName("제목 또는 내용에서 검색")
+	public void searchByTitleOrContentTest() {
+		Article article1 = Article.builder().title("RiceSnack").content("Crunky").build();
+		blogRepo.save(article1);
+		Article article2 = Article.builder().title("Choco").content("RiceSnack").build();
+		blogRepo.save(article2);
+		
+		List<Article> result = blogRepo.findAllByTitleContainsOrContentContains("Rice", "Rice");
+		assertThat(result).isNotNull();
+		assertThat(result.size()).isEqualTo(2);
 	}
 }

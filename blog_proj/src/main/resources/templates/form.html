@@ -1,14 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-    <form action="/add" method="POST">
+    <!--/* article이 있으면 수정 null이면 추가 */-->
+    <div th:if="${article ne null}">
+	    <form action="/modify" th:method="PATCH">
+	        <input type="hidden" name="id" th:value="${ article.id }" />
+	        <input name="title" th:value="${ article.title }" />
+	        <textarea name="content">[[ ${ article.content } ]]</textarea>
+	        <button> 저 장 </button>
+	    </form>
+	    <a th:href="@{ '/detail/' + ${ article.id } }">뒤로가기</a>
+    </div>
+    <form th:if="${article eq null}" action="/add" method="POST">
         <input name="title" placeholder="title" />
         <textarea name="content" placeholder="content"></textarea>
         <button> 저 장 </button>
+        <button type="reset"> 초기화 </button>
     </form>
+    <a href="/list"> 목록으로 </a>
 </body>
 </html>

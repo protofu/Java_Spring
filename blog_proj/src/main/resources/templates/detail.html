@@ -18,5 +18,7 @@
     <form th:action="@{ '/delete/' + ${ article.id } }" th:method="DELETE">
         <button>삭제</button>
     </form>
+    <a th:href="@{ '/modify/' + ${ article.id } }" th:method="GET">✏</a>
+    <a href="/list"> 목록으로 </a>
 </body>
 </html>

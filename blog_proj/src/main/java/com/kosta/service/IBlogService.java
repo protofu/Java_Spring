@@ -39,4 +39,25 @@ public class IBlogService implements BlogService{
 		blogRepo.deleteById(article.getId()); // id를 그냥 써도 되지만 혹시몰라
 		
 	}
+
+	@Override
+	public Article update(Article article) throws Exception {
+		Article originArticle = findById(article.getId());
+		originArticle.setTitle(article.getTitle());
+		originArticle.setContent(article.getContent());
+		
+		Article savedArticle = blogRepo.save(originArticle);
+		return savedArticle;
+	}
+
+	@Override
+	public List<Article> searchInTitleAndContent(String keyword) {
+		return blogRepo.findAllByTitleContainsOrContentContains(keyword, keyword);
+	}
+
+	@Override
+	public List<Article> orderingArticle(String order) {
+		if (order.equals("desc")) return blogRepo.findAllByOrderByTitleDesc(); 
+		return blogRepo.findAllByOrderByTitleAsc();
+	}
 }

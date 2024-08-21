@@ -17,4 +17,13 @@ public interface BlogService {
 	
 	// deleteById
 	void deleteById(Long id) throws Exception;
+	
+	// updateById
+	Article update(Article article) throws Exception;
+	
+	// search
+	List<Article> searchInTitleAndContent(String keyword);
+	
+	// ordering
+	List<Article> orderingArticle(String order);
 }
