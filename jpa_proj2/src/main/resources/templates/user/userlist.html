@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html 
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layouts/default}"
+>
+    <div layout:fragment="content" class="container my-4">
+        <h1>userlist</h1>
+        <form action='/search'>
+	        <input name="keyword" placeholder="검색어 입력" />
+	        <button>검색</button>
+        </form>
+        <table class="table table-striped" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>이름</th>
+                    <th>이메일</th>
+                    <th>수정</th>
+                    <th> - </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td >
+	                    <a th:href="@{/update(id=${user.id})}" > ✏ 
+	                    </a>
+                    </td>
+                    <td>
+	                    <form th:action="@{/delete(id=${user.id})}" method="POST">
+	                       <input type="hidden" name="id" th:value=${user.id}/>
+                           <button class="btn btn-danger"> X </button>
+	                    </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <form action="/add">
+            <button class="btn btn-success">유저 추가</button>
+        </form>
+    </div>
+</html>
