@@ -10,10 +10,9 @@ import com.kosta.entity.Article;
 @Repository
 public interface BlogRepo extends JpaRepository<Article, Long>{
 
-	List<Article> findAllByTitleContainsOrContentContains(String string, String string2);
+	List<Article> findAllByTitleContainsOrContentContainsOrderByTitleDesc(String keyword, String keyword2);
 
-	List<Article> findAllByOrderByTitleDesc();
+	List<Article> findAllByTitleContainsOrContentContainsOrderByTitle(String keyword, String keyword2);
 
-	List<Article> findAllByOrderByTitleAsc();
 
 }

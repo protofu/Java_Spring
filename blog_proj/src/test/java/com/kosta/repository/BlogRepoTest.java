@@ -102,12 +102,18 @@ public class BlogRepoTest {
 	@DisplayName("제목 또는 내용에서 검색")
 	public void searchByTitleOrContentTest() {
 		Article article1 = Article.builder().title("RiceSnack").content("Crunky").build();
-		blogRepo.save(article1);
+		Article savedArt1 = blogRepo.save(article1);
 		Article article2 = Article.builder().title("Choco").content("RiceSnack").build();
-		blogRepo.save(article2);
+		Article savedArt2 = blogRepo.save(article2);
 		
-		List<Article> result = blogRepo.findAllByTitleContainsOrContentContains("Rice", "Rice");
-		assertThat(result).isNotNull();
-		assertThat(result.size()).isEqualTo(2);
+		String keyword = "Rice";
+		List<Article> rltList = blogRepo.findAllByTitleContainsOrContentContainsOrderByTitle(keyword, keyword);
+		
+		assertThat(rltList.indexOf(savedArt1)).isGreaterThan(rltList.indexOf(savedArt2));
+		assertThat(rltList.stream().allMatch(article -> 
+	    	article.getTitle().contains(keyword) || article.getContent().contains(keyword)
+		));
+
+		
 	}
 }

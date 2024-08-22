@@ -51,13 +51,13 @@ public class IBlogService implements BlogService{
 	}
 
 	@Override
-	public List<Article> searchInTitleAndContent(String keyword) {
-		return blogRepo.findAllByTitleContainsOrContentContains(keyword, keyword);
+	public List<Article> searchAndOrder(String keyword, String order) {
+		if (order.equals("desc")) {
+			// 내림차순
+			return blogRepo.findAllByTitleContainsOrContentContainsOrderByTitleDesc(keyword, keyword);
+		}
+		// 오름차순
+		return blogRepo.findAllByTitleContainsOrContentContainsOrderByTitle(keyword, keyword);
 	}
 
-	@Override
-	public List<Article> orderingArticle(String order) {
-		if (order.equals("desc")) return blogRepo.findAllByOrderByTitleDesc(); 
-		return blogRepo.findAllByOrderByTitleAsc();
-	}
 }

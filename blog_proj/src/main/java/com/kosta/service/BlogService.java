@@ -20,10 +20,7 @@ public interface BlogService {
 	
 	// updateById
 	Article update(Article article) throws Exception;
-	
-	// search
-	List<Article> searchInTitleAndContent(String keyword);
-	
-	// ordering
-	List<Article> orderingArticle(String order);
+
+	// search & ordering
+	List<Article> searchAndOrder(String keyword, String order);
 }
