@@ -34,7 +34,7 @@ public class Usercontroller {
 	@PostMapping("/join")
 	public String join(User user) {
 		userService.save(user);
-		return "redirect:/login";
+		return "login";
 	}
 	
 	// '/logout' 동작
