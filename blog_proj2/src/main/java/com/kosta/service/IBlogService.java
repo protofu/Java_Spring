@@ -12,42 +12,42 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class IBlogService implements BlogService{
-	private final BlogRepo userRepo;
+	private final BlogRepo articleRepo;
 	
 	@Override
 	public List<Article> findAll() {
-		return userRepo.findAll();
+		return articleRepo.findAll();
 	}
 
 	@Override
 	public List<Article> searchAndOrder(String keyword, String order) {
-		if (order.equals("desc")) return userRepo.findAllByNameContainsOrContentContainsOrderByNameDesc(keyword, keyword);
-		return userRepo.findAllByNameContainsOrContentContainsOrderByName(keyword, keyword);
+		if (order.equals("desc")) return articleRepo.findAllByNameContainsOrContentContainsOrderByNameDesc(keyword, keyword);
+		return articleRepo.findAllByNameContainsOrContentContainsOrderByName(keyword, keyword);
 	}
 
 	@Override
-	public void save(Article user) {
-		userRepo.save(user);
+	public void save(Article article) {
+		articleRepo.save(article);
 	}
 
 	@Override
 	public Article findById(Long id) throws Exception {
-		Article user = userRepo.findById(id).orElseThrow(() -> new Exception("없는 유저 입니다."));
-		return user;
+		Article article = articleRepo.findById(id).orElseThrow(() -> new Exception("없는 유저 입니다."));
+		return article;
 	}
 
 	@Override
 	public void deleteById(Long id) throws Exception {
-		userRepo.deleteById(findById(id).getId());
+		articleRepo.deleteById(findById(id).getId());
 	}
 
 	@Override
-	public Article update(Article user) throws Exception {
-		Article originUser = findById(user.getId());
-		originUser.setName(user.getName());
-		originUser.setContent(user.getContent());
-		Article updatedUser = userRepo.save(originUser);
-		return updatedUser;
+	public Article update(Article article) throws Exception {
+		Article originarticle = findById(article.getId());
+		originarticle.setName(article.getName());
+		originarticle.setContent(article.getContent());
+		Article updatedarticle = articleRepo.save(originarticle);
+		return updatedarticle;
 	}
 
 }

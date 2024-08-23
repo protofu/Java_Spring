@@ -39,14 +39,18 @@ public class WebSecurityConfig {
 			auth.requestMatchers(
 				// 인증, 인가 설정 (특정한 URL 액세스를 설정)
 				new AntPathRequestMatcher("/login"),
-				new AntPathRequestMatcher("/join")
+				new AntPathRequestMatcher("/join"),
+				new AntPathRequestMatcher("/blog/list")
 			).permitAll()
+			.requestMatchers(
+				new AntPathRequestMatcher("/admin/**")
+			).hasRole("ADMIN")
 			// 나머지는 인증이 필요
 			.anyRequest().authenticated()
 		// form 기반 로그인 설정(로그인은 login.html로 이동하고, 성공시 "/blog/list"로 연결
 		).formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/blog/list"))
 		// 로그아웃 설정(로그아웃이 성공적으로 되면 "/login"으로 연결, 동시에 세션 만료
-		.logout(logout -> logout.logoutSuccessUrl("/login").invalidateHttpSession(true))
+		.logout(logout -> logout.logoutSuccessUrl("/blog/list").invalidateHttpSession(true))
 		// CSRF 공격 방지 설정
 		.csrf(AbstractHttpConfigurer::disable)
 		// CORS 비활성화

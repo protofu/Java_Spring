@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.kosta.entity.Article;
+import com.kosta.entity.User;
 import com.kosta.repository.BlogRepo;
 
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,8 @@ public class IBlogService implements BlogService{
 	private final BlogRepo blogRepo;
 
 	@Override
-	public Article save(Article article) {
+	public Article save(Article article, User user) {
+		article.setCreator(user);
 		return blogRepo.save(article);
 	}
 
@@ -34,17 +36,28 @@ public class IBlogService implements BlogService{
 	}
 
 	@Override
-	public void deleteById(Long id) throws Exception {
+	public void deleteById(Long id, User user) throws Exception {
 		Article article = findById(id);
-		blogRepo.deleteById(article.getId()); // id를 그냥 써도 되지만 혹시몰라
+		User creator = article.getCreator();
+		if (user.getId().equals(creator.getId())) {
+			blogRepo.deleteById(article.getId()); // id를 그냥 써도 되지만 혹시몰라
+		} else {
+			throw new Exception("본인이 작성한 글만 삭제할 수 있습니다.");
+		}
 		
 	}
 
 	@Override
-	public Article update(Article article) throws Exception {
+	public Article update(Article article, User user) throws Exception {
 		Article originArticle = findById(article.getId());
+		User creator = originArticle.getCreator();
+		if (!user.getId().equals(creator.getId())) {
+			throw new Exception("본인이 작성한 글만 수정할 수 있습니다.");
+		}
+
 		originArticle.setTitle(article.getTitle());
 		originArticle.setContent(article.getContent());
+		
 		
 		Article savedArticle = blogRepo.save(originArticle);
 		return savedArticle;

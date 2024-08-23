@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class IUserService implements UserService{
 	private final UserRepo userRepo;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public Long save(User user) {
@@ -20,5 +20,7 @@ public class IUserService implements UserService{
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		return userRepo.save(user).getId();
 	}
+
+
 	
 }

@@ -2,6 +2,7 @@ package com.kosta.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -12,6 +13,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +36,10 @@ public class Article {
 	
 	@Column(nullable=false)
 	private String content;
+	
+	@ManyToOne
+	@JoinColumn(name="creator_id", referencedColumnName="id")
+	private User creator;
 	
 	@CreatedDate
 	@Column(name="created_at")

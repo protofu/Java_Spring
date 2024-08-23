@@ -12,6 +12,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<link rel="icon" href="data:,">
 </head>
 <body>
 	<div class="p-5 mb-5 text-center bg-dark-subtle">
@@ -23,17 +24,17 @@
 			<div class="col-lg-8">
 				<article>
 					<header class="mb-4">
-						<h2 class="fw-bolder mb-1">[[${user.name}]]</h2>
+						<h2 class="fw-bolder mb-1">[[${article.name}]]</h2>
 						<div class="text-muted fst-italic mb-2">[[
-							|${#temporals.format(user.updatedAt, 'yyyy-MM-dd a hh:mm')}에
+							|${#temporals.format(article.updatedAt, 'yyyy-MM-dd a hh:mm')}에
 							작성| ]]</div>
 					</header>
 					<section class="mb-5">
-						<p class="fs-5 mb-4">[[${user.content}]]</p>
+						<p class="fs-5 mb-4">[[${article.content}]]</p>
 					</section>
-					<a th:href="@{'/blog/modify/' + ${ user.id }}"
+					<a th:href="@{'/blog/modify/' + ${ article.id }}"
 						class='btn btn-primary btn-sm'>수정</a>
-					<form th:action="@{'/blog/delete/' + ${ user.id }}" th:method="DELETE"
+					<form th:action="@{'/blog/delete/' + ${ article.id }}" th:method="DELETE"
 						class='d-inline'>
 						<button class='btn btn-secondary btn-sm'>삭제</button>
 					</form>

@@ -38,6 +38,9 @@ public class User implements UserDetails{
 	@Column(nullable=false)
 	private String password;
 	
+	@Column(name="login_count", nullable=false)
+	private Long loginCount = 0L;
+	
 	@CreatedDate
 	@Column(name="created_at")
 	private LocalDateTime createdAt;

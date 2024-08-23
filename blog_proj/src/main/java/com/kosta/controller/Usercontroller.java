@@ -21,20 +21,20 @@ public class Usercontroller {
 	// '/login' 화면
 	@GetMapping("/login")
 	public String loginPage() {
-		return "login";
+		return userService.isLogin() ? "redirect:/blog/list" : "user/login";
 	}
 	
 	// '/join' 화면
 	@GetMapping("/join")
 	public String joinPage() {
-		return "join";
+		return userService.isLogin() ? "redirect:/blog/list" : "user/join";
 	}
 	
 	// '/join' 동작
 	@PostMapping("/join")
 	public String join(User user) {
 		userService.save(user);
-		return "login";
+		return "redirect:/login";
 	}
 	
 	// '/logout' 동작

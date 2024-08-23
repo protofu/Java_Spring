@@ -2,6 +2,7 @@ package com.kosta.controller;
 
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kosta.entity.Article;
+import com.kosta.entity.User;
 import com.kosta.service.BlogService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,13 +28,14 @@ public class BlogController {
 	// save page
 	@GetMapping("/add")
 	public String addPage() {
-		return "form";
+		return "blog/form";
 	}
 	
 	// save func
 	@PostMapping("/add")
-	public String addArticle(Article article) {
-		blogService.save(article);
+	public String addArticle(Article article, @AuthenticationPrincipal User user) {
+		System.out.println(user);
+		blogService.save(article, user);
 		return "redirect:/blog/list";
 	}
 	
@@ -46,7 +49,7 @@ public class BlogController {
 			articleList = blogService.findAll();
 		}
 		model.addAttribute("list", articleList);
-		return "list";
+		return "blog/list";
 	}
 	
 	// findById
@@ -55,7 +58,7 @@ public class BlogController {
 		try {
 			Article article = blogService.findById(id);
 			model.addAttribute("article", article);
-			return "detail";
+			return "blog/detail";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errMsg", e.getMessage());
@@ -65,9 +68,9 @@ public class BlogController {
 	
 	// delete
 	@DeleteMapping("/delete/{id}")
-	public String deleteArticle(@PathVariable("id") Long id, Model model) {
+	public String deleteArticle(@PathVariable("id") Long id, Model model, @AuthenticationPrincipal User user) {
 		try {
-			blogService.deleteById(id);
+			blogService.deleteById(id, user);
 			return "redirect:/blog/list";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,7 +85,7 @@ public class BlogController {
 		try {
 			Article article = blogService.findById(id);
 			model.addAttribute("article", article);
-			return "form";
+			return "blog/form";
 		} catch (Exception e) {
 			e.printStackTrace();
 			model.addAttribute("errMsg", e.getMessage());
@@ -92,9 +95,9 @@ public class BlogController {
 	
 	// modify
 	@PatchMapping("/modify")
-	public String modifyArticle(Article article, Model model) {
+	public String modifyArticle(Article article, Model model, @AuthenticationPrincipal User user) {
 		try {
-			blogService.update(article);
+			blogService.update(article, user);
 			return "redirect:/blog/detail/" + article.getId();
 		} catch (Exception e) {
 			e.printStackTrace();

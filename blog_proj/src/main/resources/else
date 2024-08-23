@@ -1,0 +1,16 @@
+<!-- username 출력 -->
+        <p sec:authentication="name"></p>
+        <p>[[ ${ #authentication.name } ]]</p>
+        
+        <!-- 역할 출력 -->
+        <p>[[ ${ #authentication.authorities } ]]</p>
+
+        <!-- 로그인 사용자 전체 정보 -->
+        <p sec:authentication="principal"></p>
+        <p>[[ ${ #authentication.principal } ]]</p>
+        
+        <!-- 로그인 여부에 따른 분기 (로그인 사용자만 보임) -->
+        <p sec:authorize="isAuthenticated()">로그인 사용자</p>
+        
+        <!-- 권한에 따른 분기 (ROLE_USER만 보임) -->
+        <p sec:authorize="hasRole('ROLE_USER')">ROLE_USER만 보임</p>
